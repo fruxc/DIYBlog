@@ -34,6 +34,8 @@
       <div class="col-md-8 col-md-10 mx-auto">
         <div class="site-heading">
           <h3 class="site-heading my-4 mt-3 text-white center">
+            {% if user.is_authenticated %} Hi, {{ user.username }}! {% endif %}
+            <br />
             Welcome to DIY Blog
           </h3>
         </div>
