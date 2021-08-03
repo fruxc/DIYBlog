@@ -10,4 +10,5 @@ urlpatterns = [
     path('accounts/register', views.register, name='register'),
     path('accounts/login', views.login, name='login'),
     path('accounts/logout', views.logoutUser, name='logout'),
+    path('blog/blogger/<slug:author>', views.blogger, name='blogger'),
 ]

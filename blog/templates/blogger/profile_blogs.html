@@ -1,0 +1,25 @@
+{% extends "base.html" %} {% block content %} {% if user.is_authenticated %}
+
+<div class="container">
+  <div class="row">
+    <!-- Blog Entries Column -->
+    <div class="col-md-8 mt-3 left">
+      {% for post in post %}
+      <div class="card mb-4">
+        <div class="card-body">
+          <a href="{% url 'post_detail' post.id  %}">
+            <h2 class="card-title">{{ post.title }}</h2>
+          </a>
+          <p class="card-text text-muted h6">
+            {{ post.author }} | {{ post.created_on }}
+          </p>
+          <p class="card-text">{{post.content|slice:":200" }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% else %}
+<p>Login to view details.</p>
+{% endif %} {% endblock %}

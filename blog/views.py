@@ -5,6 +5,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.forms.models import model_to_dict
 
 
 def register(request):
@@ -21,12 +23,19 @@ def register(request):
         form = CreateUserForm()
 
     context = {'form': form}
-    return render(request, 'registration/register.html', context)
+    template_name = 'registration/register.html'
+    return render(request, template_name, context)
 
 
 def logoutUser(request):
     logout(request)
     return render(request, 'index')
+
+
+def blogger(request, author):
+    posts = Post.objects.filter(
+        author__username=author).order_by('-created_on')
+    return render(request, 'blogger/profile_blogs.html', {'post': posts})
 
 
 def post_detail(request, id):
@@ -47,7 +56,6 @@ def post_detail(request, id):
             new_comment.save()
     else:
         comment_form = CommentForm()
-
     return render(request, template_name, {'post': post,
                                            'comments': comments,
                                            'new_comment': new_comment,
@@ -58,7 +66,6 @@ class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
     template_name = 'blogs.html'
     paginate_by = 5
-
 
 # class PostDetail(generic.DetailView):
 #     model = Post
