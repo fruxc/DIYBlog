@@ -1,14 +1,15 @@
 from django.views import generic
 from .models import Post
-from .forms import CommentForm
+from .forms import CommentForm, CreateUserForm
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-
+        form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data['username']
@@ -17,10 +18,15 @@ def register(request):
             login(request, user)
             return render(request, 'index.html')
     else:
-        form = UserCreationForm()
+        form = CreateUserForm()
 
     context = {'form': form}
     return render(request, 'registration/register.html', context)
+
+
+def logoutUser(request):
+    logout(request)
+    return render(request, 'index')
 
 
 def post_detail(request, id):
@@ -59,5 +65,5 @@ class PostList(generic.ListView):
 #     template_name = 'post_detail.html'
 
 
-def Index(request):
+def index(request):
     return render(request, 'index.html')
