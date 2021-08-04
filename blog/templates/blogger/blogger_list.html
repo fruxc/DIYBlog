@@ -4,13 +4,13 @@
   <div class="row">
     <!-- Blog Entries Column -->
     <div class="col-md-8 mt-3 left">
-      {% for post in post %}
+      {% for user in users %}
       <div class="card mb-4">
         <div class="card-body">
-          <a href="{% url 'post_detail' post.id  %}">
-            <h2 class="card-title">{{ post.title }}</h2>
-          </a>
-          <p class="card-text text-muted h6">{{ post.created_on }}</p>
+          <a href="{% url 'blogger' user.username %}">
+            <h2 class="card-title">{{ user.username }}</h2></a
+          >
+          <p class="card-text text-muted h6"></p>
         </div>
       </div>
       {% endfor %}

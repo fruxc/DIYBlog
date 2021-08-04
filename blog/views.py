@@ -32,6 +32,11 @@ def logoutUser(request):
     return render(request, 'index')
 
 
+def bloggers(request):
+    users = User.objects.all()
+    return render(request, 'blogger/blogger_list.html', {'users': users})
+
+
 def blogger(request, author):
     user = get_object_or_404(User, username=author)
     posts = Post.objects.filter(
