@@ -2,23 +2,6 @@
 
 <div class="container">
   <div class="row">
-    <!-- User Details Column -->
-    <div class="col-md-8 mt-3 left">
-      <div class="card mb-4">
-        <div class="card-body">
-          <h2 class="card-title">Username: {{ user.username }}</h2>
-          <p class="card-text text-muted h6">User Email: {{ user.email }}</p>
-          <div class="card-content">
-            <p class="card-text text-muted">
-              First Name: {{ user.first_name }}
-            </p>
-            <p class="card-text text-muted">Last Name: {{ user.last_name }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
     <!-- Blog Entries Column -->
     <div class="col-md-8 mt-3 left">
       {% for post in post %}

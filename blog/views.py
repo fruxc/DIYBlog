@@ -33,9 +33,10 @@ def logoutUser(request):
 
 
 def blogger(request, author):
+    user = get_object_or_404(User, username=author)
     posts = Post.objects.filter(
         author__username=author).order_by('-created_on')
-    return render(request, 'blogger/profile_blogs.html', {'post': posts})
+    return render(request, 'blogger/profile_blogs.html', {'post': posts, 'user': user})
 
 
 def post_detail(request, id):
